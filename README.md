@@ -39,26 +39,68 @@ We can use various models to determine/predict the price of the car. We can use 
 ### Deployment
 
 
-With the model I used pipe_1 which is for Linear Regression model trained on 'manufacturer' and 'odometer' I got following
+#### With the model I used pipe_1 which is for Linear Regression model trained on 'manufacturer' and 'odometer' I got following
+```
 Train MSE:  216723965.09
 Test MSE:  214549394.08
 Train RMSE:  14721.55
 Test RMSE:  14647.50
-
-My Train and Test RSME are very near. So the performance is similar with Train and Test sets. 
-I definately have prediction error higher so the steps I can use to improve are 
-The current features 'manufacturer' and 'odometer' are likely insufficient to predict price accurately.
-I need to consider 'condition', 'year' etc
-I can also look into sked data as dataset has some cars with much higher price
-
+```
+My Train and Test RSME are very near. So the performance is similar with Train and Test sets. I definately have prediction error higher so the steps I can use to improve are 
+* The current features 'manufacturer' and 'odometer' are likely insufficient to predict price accurately.
+* I need to consider 'condition', 'year' etc
+* I can also look into sked data as dataset has some cars with much higher price
 
 
-# With pipe_2 model Linear Regression model trained on 'manufacturer', 'odometer' and 'year'
-# I got following
-# Train MSE:  193902001.04
-# Test MSE:  189432576.12
-# Train RMSE:  13924.87
-# Test RMSE:  13763.45
 
-# Adding year infromation is slightly better than previous model. 
+#### With pipe_2 model Linear Regression model trained on 'manufacturer', 'odometer' and 'year'. I got following
+```
+Train MSE:  193902001.04
+Test MSE:  189432576.12
+Train RMSE:  13924.87
+Test RMSE:  13763.45
+```
+Adding year infromation is slightly better than previous model. 
+
+#### Tried above same models by removing sked data. 
+* ninety_ninth_percentile_price = data['price'].quantile(0.99) = 66995.00
+* Used that in filtering out the data 
+* data_filtered = data[(data['price'] > 0) & (data['price'] <= ninety_ninth_percentile_price)]
+
+pipe_1 data model
+```
+Train MSE:  171432102.96
+Test MSE:  171882650.89
+Train RMSE:  13093.21
+Test RMSE:  13110.40
+```
+
+pipe_2 data model
+```
+Train MSE:  149290346.62
+Test MSE:  148600649.74
+Train RMSE:  12218.44
+Test RMSE:  12190.19
+```
+It's better than before 
+
+#### Polynomial Regression with same similar models with degree of 2. Degree of 3 had more RMSE then degree of 2. 
+Polynomial Regression Pipeline on 'manufacturer', 'odometer' with 'price' (degree=2)
+```
+Train MSE:  225048524.61
+Test MSE:  219977296.23
+Train RMSE:  15001.62
+Test RMSE:  14831.63
+```
+
+Polynomial Regression Pipeline on 'manufacturer', 'odometer', 'year' with 'price'(degree=2)
+```
+Train MSE:  183978366.99
+Test MSE:  182257395.98
+Train RMSE:  13563.86
+Test RMSE:  13500.27
+```
+
+#### Improvements
+* We can filter out the data by top 20 'manufacturer'
 
