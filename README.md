@@ -3,5 +3,5 @@ Apply the CRISP-DM framework to the provided dataset of 426K used cars. Understa
 
 Jupyter notebook: [assignment_11_1_PanktiModi.ipynb](https://github.com/panmodi/assignment-11-1/blob/main/assignment_11_1_PanktiModi.ipynb)
 
-Data used: [vehicles.zip]([https://github.com/panmodi/assignment-5-1/blob/7b99af89573a75880fc6fc429c8b0a1375027afe/data/coupons.csv](https://github.com/panmodi/assignment-11-1/blob/main/data/vehicles.zip))
+Data used: [vehicles.zip](https://github.com/panmodi/assignment-11-1/blob/main/data/vehicles.zip)
 
