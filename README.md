@@ -11,7 +11,7 @@ Client, used car dealers,  might be manully pricing the inventory. This dataset 
 
 We can use various models to determine/predict the price of the car. We can use various deatures of the car and take actionable recommendations for the client on which type of cars to acquire and how to proce them effectively. 
 
-#### Data Understanding
+### Data Understanding
 * Total rows: 426880
 * Total rows where price!=0 : 32895
 * As 'fuel', 'transmission' has <1% of data NaN, making NaN data as 'other'
@@ -21,5 +21,44 @@ We can use various models to determine/predict the price of the car. We can use 
 * Made new DataFrame 'data_clean' with few of the columns. e.g. 'id', 'region','price','manufacturer','condition','odometer','state','year'
 * Have added few graphs to understand the data
 
-#### Data Preparation
+### Data Preparation
+* Column 'manufacturer' has categorical data so would use OneHotEncoder
+* Also split the data in train and test set
+
+### Modeling
+* Few models like LinearRegression, Polynomial regression can be used
+
+### Evaluation
+* Predict the data with various models used
+* pipe_1 is using LinearRegression model on 'manufacturer', 'odometer' with 'price'
+* pipe_2 is using LinearRegression model on 'manufacturer', 'odometer','year' with 'price'
+* pipe_poly is using Polynomial Regression Pipeline on 'manufacturer', 'odometer' with 'price'
+* pipe_poly is also using Polynomial Regression Pipeline on 'manufacturer', 'odometer', 'year' with 'price'
+* pipe_2 is also using LinearRegression model on 'manufacturer', 'odometer','condition', 'year' with 'price'
+
+### Deployment
+
+
+With the model I used pipe_1 which is for Linear Regression model trained on 'manufacturer' and 'odometer' I got following
+Train MSE:  216723965.09
+Test MSE:  214549394.08
+Train RMSE:  14721.55
+Test RMSE:  14647.50
+
+My Train and Test RSME are very near. So the performance is similar with Train and Test sets. 
+I definately have prediction error higher so the steps I can use to improve are 
+The current features 'manufacturer' and 'odometer' are likely insufficient to predict price accurately.
+I need to consider 'condition', 'year' etc
+I can also look into sked data as dataset has some cars with much higher price
+
+
+
+# With pipe_2 model Linear Regression model trained on 'manufacturer', 'odometer' and 'year'
+# I got following
+# Train MSE:  193902001.04
+# Test MSE:  189432576.12
+# Train RMSE:  13924.87
+# Test RMSE:  13763.45
+
+# Adding year infromation is slightly better than previous model. 
 
